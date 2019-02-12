@@ -29,7 +29,6 @@ function countBasketPrice(basket) {
     let sum = 0;
     basket.forEach((element) => sum += element.article.price * element.count);
     return sum;
-    
 }
 
 const article = [];
