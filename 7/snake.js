@@ -40,28 +40,27 @@ let snake = {
                     nextPoint.y = 0;
                 }
                 break;
-                //return {x: firstPoint.x, y: firstPoint.y + 1};
             case 'right':
                 nextPoint = {x: firstPoint.x + 1, y: firstPoint.y};
                 if (nextPoint.x >= settings.colsCount) {
                     nextPoint.x = 0;
                 }
                 break;
-                //return {x: firstPoint.x + 1, y: firstPoint.y};
             case 'left' :
                 nextPoint = {x: firstPoint.x - 1, y: firstPoint.y};
                 if (nextPoint.x < 0) {
                     nextPoint.x = settings.colsCount - 1;
                 }
                 break;
-                //return {x: firstPoint.x - 1, y: firstPoint.y};
         }
 
         return nextPoint;
     },
 
     isBodyPoint(point) {
-        return this.body.some(snakePoint => snakePoint.x === point.x && snakePoint.y === point.y);
+        let netxBody = JSON.parse(JSON.stringify(this.body));
+        netxBody.pop();
+        return netxBody.some(snakePoint => snakePoint.x === point.x && snakePoint.y === point.y);
     },
 
     setDirection(direction) {
@@ -277,7 +276,8 @@ let game = {
         this.food.setFoodCoordinates(this.getRandomCoordinates());
 
         this.renderer.render(this.snake.body, this.food.getFoodCoordinates());
-        this.renderer.renderScope(this.scope);
+        this.scope = 0;
+
         
     },
 
